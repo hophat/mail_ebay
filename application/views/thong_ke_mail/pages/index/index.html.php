@@ -1,12 +1,12 @@
 <div>
-   
+
 
     <div class="container">
         <div class="row ">
             <!-- <div class="col-6">
                 <h3>Thông kê</h3>
             </div> -->
-            <div class="col-4 pb-2 pt-2 pl-0">
+            <div class="col-12 pb-2 pt-2 pl-0">
                 <template>
                     <el-select filterable @change="getList()" v-model="dateSelect" placeholder="Select">
                         <el-option v-for="item in listDate" :key="item" :label="item" :value="item">
@@ -25,8 +25,8 @@
                     <thead class="bg-success">
                         <tr>
                             <th>STT</th>
-                            <th>Bán hàng</th>
-                            <th>Tin nhắn</th>
+                            <th>Bán</th>
+                            <th>Chat</th>
                             <th>khác</th>
                             <th>Ngày</th>
                         </tr>
@@ -34,9 +34,23 @@
                     <tbody>
                         <tr v-for="item in list">
                             <td>{{item.acc_name}}</td>
-                            <td class="text-danger " style="font-size: 20px;font-weight: bold; ">{{item.save}} </td>
-                            <td class="text-warning" style="font-size: 20px;font-weight: bold;">{{item.mess}}</td>
-                            <td>{{item.other}}</td>
+                            <td class="text-danger ">
+                                <router-link style="color: red;" :to="'/view/save/'+item.acc_id+'/'+item.date">
+                                    <el-link type="danger" style="font-size: 20px;font-weight: bold; ">({{ item.save }})</el-link>
+                                </router-link>
+                            </td>
+                            <td>
+                                <router-link :to="'/view/mess/'+item.acc_id+'/'+item.date">
+                                    <el-link type="primary" style="font-size: 20px;font-weight: bold; ">({{ item.mess }})</el-link>
+                                </router-link>
+                            </td>
+
+                            <td>
+                                <router-link :to="'/view/orther/'+item.acc_id+'/'+item.date">
+                                    <el-link style="font-size: 20px;font-weight: bold; ">({{ item.other }})</el-link>
+                                </router-link>
+                            </td>
+
                             <td>{{item.date}}</td>
 
                         </tr>

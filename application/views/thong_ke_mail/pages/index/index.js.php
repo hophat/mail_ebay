@@ -28,6 +28,9 @@ array_unshift($days, $dateNow);
             }
         },
         created() {
+            if (sessionStorage.getItem('dateSelect') != null) {
+                this.dateSelect = sessionStorage.getItem('dateSelect');
+            }
             this.get_chot_so();
             this.getList();
             // this.load_list_product(this.offset, this.limit);
@@ -120,59 +123,13 @@ array_unshift($days, $dateNow);
                 })
             },
             getList() {
-                this.loadding = true;
+                const loading = this.$loading({});
                 const Formdt = new FormData();
                 let date = this.dateSelect;
+                sessionStorage.setItem('dateSelect', date);
                 axios.post("<?= base_url('/Thongke/get_list') ?>" + "/" + date).then(res => {
+                    loading.close();
                     this.list = res.data;
-                    this.loadding = false;
-                    console.log(this.list);
-
-                })
-                setTimeout(() => {
-                    this.getList();
-                }, 5000)
-            },
-
-            cholo() {
-                const Formdt = new FormData();
-                if (this.lo_1 != '') {
-                    Formdt.append("lo_1", this.lo_1);
-                }
-                if (this.lo_2 != '') {
-                    Formdt.append("lo_2", this.lo_2);
-                }
-                if (this.lo_btl != '') {
-                    Formdt.append("lo_btl", this.lo_btl);
-                }
-                if (this.de_1 != '') {
-                    Formdt.append("de_1", this.de_1);
-                }
-                if (this.de_2 != '') {
-                    Formdt.append("de_2", this.de_2);
-                }
-                if (this.de_3 != '') {
-                    Formdt.append("de_3", this.de_3);
-                }
-                if (this.de_4 != '') {
-                    Formdt.append("de_4", this.de_4);
-                }
-                if (this.de_5 != '') {
-                    Formdt.append("de_5", this.de_5);
-                }
-                if (this.de_6 != '') {
-                    Formdt.append("de_6", this.de_6);
-                }
-
-                return axios.post("<?= base_url('/Chotso/chot') ?>", Formdt).then((data) => {
-                    if (!data.status) {
-                        this.notifi_error("KHông thành công");
-                        return
-                    }
-                    $("#ssss1").modal('hide');
-                    this.get_list();
-                    this.notify_success("Chốt thành công");
-
                 })
             },
             submit_() {

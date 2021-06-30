@@ -76,7 +76,7 @@ class Mail_model extends CI_Model
     }
 
     // danh sách lo được chôt nhiều theo ngày
-    public function get_thong_ke($acc = 1, $date = '2021-06-11')
+    public function get_thong_ke($date = '2021-06-11')
     {
         // get acc
         $users = $this->db->get('acc')->result_array();
@@ -84,7 +84,7 @@ class Mail_model extends CI_Model
         $out = [];
         foreach ($users as $user) {
             $this->db->from('mail_data');
-            $this->db->select('COUNT(*) as count,DATE(mail_date) as mail_date,acc_name,mail_type');
+            $this->db->select('COUNT(*) as count,acc_id, DATE(mail_date) as mail_date,acc_name,mail_type');
             $this->db->join('acc', 'acc.acc_id = mail_data.mail_acc', 'left');
             $this->db->group_by('mail_acc');
             $this->db->group_by('mail_type');
@@ -92,6 +92,7 @@ class Mail_model extends CI_Model
             $data_mail =   $this->db->get()->result_array();
             $data_row = [
                 'acc_name' => $user['acc_name'],
+                'acc_id' => $user['acc_id'],
                 'save' => 0,
                 'other' => 0,
                 'mess' => 0,
@@ -114,5 +115,21 @@ class Mail_model extends CI_Model
             $out[] =  $data_row;
         }
         return $out;
+    }
+
+
+
+    // danh sách lo được chôt nhiều theo ngày
+    public function get_list_mail($date = '2021-06-11', $type = 'save', $acc_id = 1)
+    {
+        // get list mail
+        $this->db->from('mail_data');
+        $this->db->select('*, DATE(mail_date) as mail_date');
+        $this->db->where(['DATE(mail_date)' => $date, 'mail_type' =>  $type, 'mail_acc' =>  $acc_id]);
+        // var_dump(['DATE(mail_date)' => $date, 'mail_type' =>  $type, 'mail_acc' =>  $acc_id]);
+        $this->db->limit(10);
+        $data_mail =   $this->db->get()->result_array();
+        
+        return $data_mail;
     }
 }

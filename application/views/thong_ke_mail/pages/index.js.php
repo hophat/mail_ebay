@@ -6,6 +6,7 @@
 
 include 'index/index.js.php';
 include 'add_acc/index.js.php';
+include 'view_mail/index.js.php';
 ?>
 
 <script>
@@ -17,6 +18,11 @@ include 'add_acc/index.js.php';
 		{
 			path: '/add',
 			component: add,
+			props: true
+		},
+		{
+			path: '/view/:type/:id/:date',
+			component: view_index,
 			props: true
 		},
 	]
@@ -40,7 +46,7 @@ include 'add_acc/index.js.php';
 
 		},
 		mounted() {
-			
+
 		},
 		created() {},
 		methods: {},
