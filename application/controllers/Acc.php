@@ -22,6 +22,7 @@ class Acc extends Ci_Controller
         $params['acc_email'] = $this->input->post('acc_email');
         $params['acc_pass'] = $this->input->post('acc_pass');
         $params['acc_name'] = $this->input->post('acc_name');
+        $params['link_check'] = $this->input->post('link_check');
 
         $added  = $this->Acc_model->add($params);
         if ($added == 0) {
@@ -48,6 +49,7 @@ class Acc extends Ci_Controller
         $params['acc_email'] = $this->input->post('acc_email');
         $params['acc_pass'] = $this->input->post('acc_pass');
         $params['acc_name'] = $this->input->post('acc_name');
+        $params['link_check'] = $this->input->post('link_check');
         $acc_id = $this->input->post('acc_id');
         if (empty($acc_id)) {
             die('lỗi');

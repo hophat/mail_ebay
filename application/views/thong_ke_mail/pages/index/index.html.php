@@ -28,6 +28,7 @@
                             <th>Bán</th>
                             <th>Chat</th>
                             <th>khác</th>
+                            <th>Status</th>
                             <th>Ngày</th>
                         </tr>
                     </thead>
@@ -51,6 +52,11 @@
                                 </router-link>
                             </td>
 
+                            <td>
+                                <label for="" v-if="item.code_status == true" class="text-danger">Die</label>
+                                <label for="" v-if="item.code_status == false" class="text-success">Active</label>
+                                <!-- {{(item.code_status == true) ? 'active' : 'die'}} -->
+                            </td>
                             <td>{{item.date}}</td>
 
                         </tr>

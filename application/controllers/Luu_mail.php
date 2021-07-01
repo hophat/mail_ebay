@@ -7,9 +7,6 @@ class Luu_mail extends Ci_Controller
     public function __construct()
     {
         parent::__construct();
-        // include APPPATH . 'third_party/simple_html_dom.php';
-        // $this->load->library(array('session', 'layout'));
-        // $this->load->helper(array('url'));
         $this->load->model('Mail_model');
         $this->load->model('Acc_model');
     }
@@ -21,9 +18,13 @@ class Luu_mail extends Ci_Controller
     public function get_mail()
     {
         $ListAcc = $this->Acc_model->get_list();
-        date_default_timezone_set('America/Rio_branco');
-        $date =   date('d M Y');
-        // echo 'FROM "ebay.com" ON ' . $date;die;
+        // date_default_timezone_set('America/Rio_branco');
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
+        //        $date =   date('d M Y');
+        $dateNow = date("Y-m-d");
+        $date1 = str_replace('-', '/', $dateNow);
+        $date = date('d M Y', strtotime($date1 . "-2 days"));
+
         foreach ($ListAcc as $acc) {
             if ($acc['acc_actived'] != 1) continue;
             try {
@@ -33,7 +34,7 @@ class Luu_mail extends Ci_Controller
                 $MC = imap_check($connection);
                 // var_dump($MC);
                 // echo 'FROM "ebay.com" ON ' . $date;die;
-                $emailData = imap_search($connection, 'ON "' . $date . '"');
+                $emailData = imap_search($connection, 'SINCE "' . $date . '"');
                 if (!empty($emailData)) {
                     foreach ($emailData as $emailIdent) {
 
@@ -49,9 +50,9 @@ class Luu_mail extends Ci_Controller
                         $type = '';
                         if (strpos($title, 'item has sold') != false) {
                             $type = 'save';
-                        }else if (strpos($title, 'item is ready to ship') != false) {
+                        } else if (strpos($title, 'item is ready to ship') != false) {
                             $type = 'save';
-                        }else if (strpos($title, 'sent a message') != false) {
+                        } else if (strpos($title, 'sent a message') != false) {
                             $type = 'mess';
                         }
 

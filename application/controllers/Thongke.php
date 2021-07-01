@@ -37,14 +37,27 @@ class Thongke extends CI_Controller
         if ($date == '') {
             $date = date('Y-m-d');
         }
-        $data = $this->Mail_model->get_thong_ke($date);
-        echo json_encode($data);
-    }
 
+        $data = $this->Mail_model->get_thong_ke($date);
+        $out = [];
+        foreach ($data as $row) {
+            $row['code_status'] = $this->get_code_stauts($row['link_check']);
+            $out[] = $row;
+        }
+        echo json_encode($out);
+    }
+    public function get_code_stauts($url)
+    {
+        $hear = get_headers($url);
+        if (strpos($hear[0], '404') > -1) {
+            return false;
+        }
+        return true;
+    }
     public function get_list_mail_type($date = '', $type = '', $acc_id = '')
     {
         // var_dump($type);
-        if($type =='orther'){
+        if ($type == 'orther') {
             $type = '';
         }
         $data = $this->Mail_model->get_list_mail($date, $type, $acc_id);

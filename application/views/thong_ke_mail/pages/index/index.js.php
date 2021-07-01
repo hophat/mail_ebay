@@ -31,7 +31,6 @@ array_unshift($days, $dateNow);
             if (sessionStorage.getItem('dateSelect') != null) {
                 this.dateSelect = sessionStorage.getItem('dateSelect');
             }
-            this.get_chot_so();
             this.getList();
             // this.load_list_product(this.offset, this.limit);
             // this.get_list_partner();
@@ -102,26 +101,7 @@ array_unshift($days, $dateNow);
             formatPrice(value) {
                 return formatPrice(value)
             },
-            get_chot_so() {
-                const Formdt = new FormData();
-                let date = this.dateSelect;
-                axios.post("<?= base_url('/Chotso/get_chot') ?>" + "/" + date).then(res => {
-                    let out = res.data.data;
-                    if (res.status) {
-                        // console.log(res.data);
-                        this.lo_1 = out.lo_1
-                        this.lo_2 = out.lo_2
-                        this.lo_btl = out.lo_btl
-                        this.de_1 = out.de_1
-                        this.de_2 = out.de_2
-                        this.de_3 = out.de_3
-                        this.de_4 = out.de_4
-                        this.de_5 = out.de_5
-                        this.de_6 = out.de_6
-                        // this.lo_1 = out.lo_1
-                    }
-                })
-            },
+
             getList() {
                 const loading = this.$loading({});
                 const Formdt = new FormData();

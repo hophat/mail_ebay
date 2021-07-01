@@ -32,12 +32,14 @@ array_unshift($days, $dateNow);
                     name: '',
                     email: '',
                     pass: '',
+                    link_check: '',
                 },
                 ruleFormEdit: {
                     name: '',
                     email: '',
                     pass: '',
                     id: '',
+                    link_check: '',
                 },
                 rules: {
                     name: [{
@@ -129,6 +131,7 @@ array_unshift($days, $dateNow);
                             form.append('acc_name', this.ruleForm.name);
                             form.append('acc_email', this.ruleForm.email);
                             form.append('acc_pass', this.ruleForm.pass);
+                            form.append('link_check', this.ruleForm.link_check);
                             axios.post("<?= base_url('/Acc/add') ?>", form).then(e => {
                                 if (e.data.status) {
                                     this.notify_success("Success");
@@ -146,6 +149,7 @@ array_unshift($days, $dateNow);
                             form.append('acc_email', this.ruleFormEdit.email);
                             form.append('acc_pass', this.ruleFormEdit.pass);
                             form.append('acc_id', this.ruleFormEdit.id);
+                            form.append('link_check', this.ruleFormEdit.link_check);
                             axios.post("<?= base_url('/Acc/update') ?>", form).then(e => {
                                 if (e.data.status) {
                                     this.notify_success("Success");
@@ -251,6 +255,7 @@ array_unshift($days, $dateNow);
                     this.ruleFormEdit.email = data_.acc_email;
                     this.ruleFormEdit.name = data_.acc_name;
                     this.ruleFormEdit.pass = data_.acc_pass;
+                    this.ruleFormEdit.link_check = data_.link_check;
                     this.ruleFormEdit.id = acc_id;
                 })
             },

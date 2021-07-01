@@ -84,7 +84,7 @@ class Mail_model extends CI_Model
         $out = [];
         foreach ($users as $user) {
             $this->db->from('mail_data');
-            $this->db->select('COUNT(*) as count,acc_id, DATE(mail_date) as mail_date,acc_name,mail_type');
+            $this->db->select('COUNT(*) as count, link_check,acc_id, DATE(mail_date) as mail_date,acc_name,mail_type');
             $this->db->join('acc', 'acc.acc_id = mail_data.mail_acc', 'left');
             $this->db->group_by('mail_acc');
             $this->db->group_by('mail_type');
@@ -96,6 +96,7 @@ class Mail_model extends CI_Model
                 'save' => 0,
                 'other' => 0,
                 'mess' => 0,
+                'link_check' => $user['link_check'],
                 'date' => $date
             ];
             if ($data_mail) {

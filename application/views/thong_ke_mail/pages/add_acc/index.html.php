@@ -67,10 +67,13 @@
                         <el-form-item label="Email" prop="email">
                             <el-input v-model="ruleForm.email"></el-input>
                         </el-form-item>
+
                         <el-form-item label="Password" prop="pass">
                             <el-input type="text" v-model="ruleForm.pass"></el-input>
                         </el-form-item>
-
+                        <el-form-item label="link_check" prop="link_check">
+                            <el-input v-model="ruleForm.link_check"></el-input>
+                        </el-form-item>
                         <el-form-iem>
                             <el-button type="primary" @click="submitForm('ruleForm')">Create</el-button>
                         </el-form-iem>
@@ -101,7 +104,9 @@
                         <el-form-item label="Password" prop="pass">
                             <el-input type="text" v-model="ruleFormEdit.pass"></el-input>
                         </el-form-item>
-
+                        <el-form-item label="link_check" prop="link_check">
+                            <el-input v-model="ruleFormEdit.link_check"></el-input>
+                        </el-form-item>
                         <el-form-iem>
                             <el-button type="primary" @click="submitForm('ruleFormEdit')">update</el-button>
                         </el-form-iem>
