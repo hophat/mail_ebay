@@ -53,8 +53,8 @@
                             </td>
 
                             <td>
-                                <label for="" v-if="item.code_status == true" class="text-danger">Die</label>
-                                <label for="" v-if="item.code_status == false" class="text-success">Active</label>
+                                <label for="" v-if="item.code_status == false" class="text-danger">Die</label>
+                                <label for="" v-if="item.code_status == true" class="text-success">Active</label>
                                 <!-- {{(item.code_status == true) ? 'active' : 'die'}} -->
                             </td>
                             <td>{{item.date}}</td>
