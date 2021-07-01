@@ -49,6 +49,7 @@ class Thongke extends CI_Controller
     public function get_code_stauts($url)
     {
         $hear = get_headers($url);
+        if(empty($url)) return false;
         if (strpos($hear[0], '404') > -1) {
             return false;
         }
