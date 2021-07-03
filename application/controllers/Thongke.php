@@ -48,6 +48,9 @@ class Thongke extends CI_Controller
     }
     public function get_code_stauts($url)
     {
+
+        return true;
+        
         if (empty($url)) return false;
 
         $hear = get_headers($url);
