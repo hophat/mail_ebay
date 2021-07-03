@@ -48,7 +48,7 @@ class Thongke extends CI_Controller
     }
     public function get_code_stauts($url)
     {
-        if(empty($url)) return false;
+        if (empty($url)) return false;
 
         $hear = get_headers($url);
         if (strpos($hear[0], '200') > -1) {
@@ -64,5 +64,14 @@ class Thongke extends CI_Controller
         }
         $data = $this->Mail_model->get_list_mail($date, $type, $acc_id);
         echo json_encode($data);
+    }
+
+    public function update_seen($mail_id = '')
+    {
+        if (!empty($mail_id)) {
+            $params['mail_seen'] = 1;
+            $updated = $this->Mail_model->update($mail_id, $params);
+            echo json_encode(['status' => $updated]);
+        }
     }
 }

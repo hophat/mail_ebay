@@ -12,6 +12,10 @@ class Mail_model extends CI_Model
     {
         return $this->db->insert('mail_data', $params);
     }
+    public function update($mail_id, $params)
+    {
+        return $this->db->update('mail_data', $params, ['mail_id' => $mail_id]);
+    }
 
 
     public function get($user_id, $mail_uid)
@@ -21,59 +25,9 @@ class Mail_model extends CI_Model
         return $this->db->get_where('mail_data', $where)->row_array();
     }
 
-    public function get_top_lo()
-    {
-        // $this->db->join('tbl_user', 'tbl_user. user_id = tbl_chot_so.chot_so_user_id');
-        $this->db->select("user_avatar,user_id,user_diem_btl,user_diem_db,user_diem_lo,user_name");
-        $this->db->order_by('user_diem_lo', 'DESC');
-        $this->db->group_by('tbl_user. user_id');
-        $this->db->limit(10);
-        $data =  $this->db->get('tbl_user')->result_array();
-        $out = [];
-        $now = date('Y-m-d');
-        foreach ($data as $row) {
-            $row['chotso'] = $this->db->get_where('tbl_chot_so', ['chot_so_user_id' => $row['user_id'], 'date' => $now])->row_array();
-            $row['user_avatar'] = base_url($row['user_avatar']);
-            $out[] = $row;
-        }
-        return $out;
-    }
 
-    public function get_top_btl()
-    {
-        // $this->db->join('tbl_user', 'tbl_user. user_id = tbl_chot_so.chot_so_user_id');
-        $this->db->select("user_avatar,user_id,user_diem_btl,user_diem_db,user_diem_lo,user_name");
-        $this->db->order_by('user_diem_btl', 'DESC');
-        $this->db->group_by('tbl_user. user_id');
-        $this->db->limit(10);
-        $data =  $this->db->get('tbl_user')->result_array();
-        $out = [];
-        $now = date('Y-m-d');
-        foreach ($data as $row) {
-            $row['chotso'] = $this->db->get_where('tbl_chot_so', ['chot_so_user_id' => $row['user_id'], 'date' => $now])->row_array();
-            $row['user_avatar'] = base_url($row['user_avatar']);
-            $out[] = $row;
-        }
-        return $out;
-    }
 
-    public function get_top_db()
-    {
-        // $this->db->join('tbl_user', 'tbl_user. user_id = tbl_chot_so.chot_so_user_id');
-        $this->db->select("user_avatar,user_id,user_diem_btl,user_diem_db,user_diem_lo,user_name");
-        $this->db->order_by('user_diem_db', 'DESC');
-        $this->db->group_by('tbl_user. user_id');
-        $this->db->limit(10);
-        $data =  $this->db->get('tbl_user')->result_array();
-        $out = [];
-        $now = date('Y-m-d');
-        foreach ($data as $row) {
-            $row['chotso'] = $this->db->get_where('tbl_chot_so', ['chot_so_user_id' => $row['user_id'], 'date' => $now])->row_array();
-            $row['user_avatar'] = base_url($row['user_avatar']);
-            $out[] = $row;
-        }
-        return $out;
-    }
+
 
     // danh sách lo được chôt nhiều theo ngày
     public function get_thong_ke($date = '2021-06-11')
@@ -130,7 +84,7 @@ class Mail_model extends CI_Model
         // var_dump(['DATE(mail_date)' => $date, 'mail_type' =>  $type, 'mail_acc' =>  $acc_id]);
         $this->db->limit(10);
         $data_mail =   $this->db->get()->result_array();
-        
+
         return $data_mail;
     }
 }

@@ -93,6 +93,15 @@ array_unshift($days, $dateNow);
             see(item) {
                 this.drawer = true;
                 this.content_mail = item.mail_body;
+                axios.post("<?= base_url('/Thongke/update_seen') ?>" + "/" + item.mail_id).then(res => {
+                    console.log(res);
+                    if (res.data.status != true) {
+                        this.notifi_error("Có lỗi cập nhật");
+                    }
+                    item.seen = 1;
+                    this.get_list_mail();
+                })
+
             },
             notify_success(mess) {
                 this.$notify.success({

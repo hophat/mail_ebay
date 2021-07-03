@@ -27,7 +27,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="(item,index) in list">
+                        <tr v-for="(item,index) in list" :style="(item.mail_seen == 1) ? 'background-color: #cdd9e6;' : ''">
                             <td>{{index}}</td>
                             <td>{{item.mail_title}}</td>
                             <td>{{item.mail_date}}</td>
@@ -44,7 +44,7 @@
     </div>
 
 
-    <el-drawer  size="50%" title="I am the title" :visible.sync="drawer" :with-header="false">
+    <el-drawer size="50%" title="I am the title" :visible.sync="drawer" :with-header="false">
         <div v-html="content_mail"></div>
     </el-drawer>
 </div>

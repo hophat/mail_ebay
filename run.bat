@@ -1,0 +1,1 @@
+cd C:\xampp\htdocs\mail_ebay\ && C:\xampp\php\php.exe index.php Luu_mail get_mail
