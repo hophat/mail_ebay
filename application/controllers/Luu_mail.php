@@ -27,6 +27,10 @@ class Luu_mail extends Ci_Controller
 
         foreach ($ListAcc as $acc) {
             if ($acc['acc_actived'] != 1) continue;
+            // get xem chết link chưa + update
+            $update_['code_status'] = $this->get_code_stauts($acc['link_check']);
+            $this->Acc_model->update($update_,  $acc['acc_id']);
+            //
             try {
                 $accout = $acc['acc_email'];
                 $pass = $acc['acc_pass'];
@@ -37,6 +41,8 @@ class Luu_mail extends Ci_Controller
                 $emailData = imap_search($connection, 'SINCE "' . $date . '"');
                 if (!empty($emailData)) {
                     foreach ($emailData as $emailIdent) {
+
+
 
                         $overview = imap_fetch_overview($connection, $emailIdent, 0);
                         $uid = $overview[0]->uid;
@@ -82,5 +88,31 @@ class Luu_mail extends Ci_Controller
                 log_message('error', $e);
             }
         }
+    }
+
+
+    public function get_list($date = '')
+    {
+        if ($date == '') {
+            $date = date('Y-m-d');
+        }
+
+        $data = $this->Mail_model->get_thong_ke($date);
+        $out = [];
+        foreach ($data as $row) {
+            $row['code_status'] = $this->get_code_stauts($row['link_check']);
+            $out[] = $row;
+        }
+        echo json_encode($out);
+    }
+    public function get_code_stauts($url)
+    {
+        if (empty($url)) return false;
+
+        $hear = get_headers($url);
+        if (strpos($hear[0], '200') > -1) {
+            return true;
+        }
+        return false;
     }
 }

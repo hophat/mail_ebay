@@ -39,12 +39,12 @@ class Thongke extends CI_Controller
         }
 
         $data = $this->Mail_model->get_thong_ke($date);
-        $out = [];
-        foreach ($data as $row) {
-            $row['code_status'] = $this->get_code_stauts($row['link_check']);
-            $out[] = $row;
-        }
-        echo json_encode($out);
+        // $out = [];
+        // foreach ($data as $row) {
+        //     $row['code_status'] = $this->get_code_stauts($row['link_check']);
+        //     $out[] = $row;
+        // }
+        echo json_encode($data);
     }
     public function get_code_stauts($url)
     {
