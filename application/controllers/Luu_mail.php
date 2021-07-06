@@ -57,7 +57,9 @@ class Luu_mail extends Ci_Controller
                             $type = 'save';
                         } else if (strpos($title, 'item is ready to ship') != false) {
                             $type = 'save';
-                        } else if (strpos($title, 'sent a message') != false) {
+                        } else if (strpos($title, 'a message') != false) {
+                            $type = 'mess';
+                        } else if (strpos($title, 'a question') != false) {
                             $type = 'mess';
                         }
 
