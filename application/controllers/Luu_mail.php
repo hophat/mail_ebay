@@ -34,8 +34,9 @@ class Luu_mail extends Ci_Controller
             try {
                 echo $accout = $acc['acc_email'];
                 $pass = $acc['acc_pass'];
-                $connection = imap_open('{imap-mail.outlook.com:993/imap/ssl}INBOX', $accout, $pass) or die('Cannot connect to : ' . imap_last_error());
+                $connection = imap_open('{imap-mail.outlook.com:993/imap/ssl}INBOX', $accout, $pass);
                 $MC = imap_check($connection);
+                log_message('error', imap_last_error());
                 $emailData = imap_search($connection, 'SINCE "' . $date . '"');
                 if (!empty($emailData)) {
                     foreach ($emailData as $emailIdent) {
