@@ -32,12 +32,10 @@ class Luu_mail extends Ci_Controller
             $this->Acc_model->update($update_,  $acc['acc_id']);
             //
             try {
-                $accout = $acc['acc_email'];
+                echo $accout = $acc['acc_email'];
                 $pass = $acc['acc_pass'];
                 $connection = imap_open('{imap-mail.outlook.com:993/imap/ssl}INBOX', $accout, $pass) or die('Cannot connect to : ' . imap_last_error());
                 $MC = imap_check($connection);
-                // var_dump($MC);
-                // echo 'FROM "ebay.com" ON ' . $date;die;
                 $emailData = imap_search($connection, 'SINCE "' . $date . '"');
                 if (!empty($emailData)) {
                     foreach ($emailData as $emailIdent) {
