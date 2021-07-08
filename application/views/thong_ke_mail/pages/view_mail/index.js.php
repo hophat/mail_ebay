@@ -80,13 +80,16 @@ array_unshift($days, $dateNow);
 
             },
             get_list_mail() {
+                const loading = this.$loading({
+                    lock: true,
+                });
                 const Formdt = new FormData();
                 this.dateSelect;
                 axios.post("<?= base_url('/Thongke/get_list_mail_type') ?>" + "/" + this.dateSelect + "/" + this.mail_type + "/" + this.acc_id).then(res => {
-                    this.list = res.data;
-                    // console.log(this.list);
+                    loading.close();
+                    // this.listLoading = false
                     if (res.status) {
-                        // console.log(out);
+                        this.list = res.data;
                     }
                 })
             },

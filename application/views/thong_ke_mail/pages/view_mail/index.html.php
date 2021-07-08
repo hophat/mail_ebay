@@ -9,10 +9,6 @@
                     <router-link to="/">
                         <el-button icon="el-icon-arrow-left" type="info">Back</el-button>
                     </router-link>
-                    <!-- <el-select filterable @change="getList()" v-model="dateSelect" placeholder="Select">
-                        <el-option v-for="item in listDate" :key="item" :label="item" :value="item">
-                        </el-option>
-                    </el-select> -->
                 </template>
             </div>
             <div class="col-12 p-0 ">
