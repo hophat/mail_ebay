@@ -90,7 +90,7 @@ class Welcome extends MY_Controller
 
 	public function index()
 	{
-		$this->layout->set_title('Chotlo');
+		$this->layout->set_title('Email ebay');
 		$data = [];
 		$this->load->view('header', $data);
 		$this->load->view('home/index', $data);

@@ -16,6 +16,11 @@ class Thongke extends CI_Controller
         $this->load->library(array('session', 'layout'));
         $this->load->helper(array('url', 'form'));
         $this->load->model('Mail_model');
+        if(!isset($_SESSION['logined'])) {
+            redirect("/welcome");
+            die;
+        }
+
     }
 
     public function index()
@@ -37,8 +42,8 @@ class Thongke extends CI_Controller
         if ($date == '') {
             $date = date('Y-m-d');
         }
-
-        $data = $this->Mail_model->get_thong_ke($date);
+        $user_id  = $_SESSION['user']['user_id'];
+        $data = $this->Mail_model->get_thong_ke($date, $user_id);
         // $out = [];
         // foreach ($data as $row) {
         //     $row['code_status'] = $this->get_code_stauts($row['link_check']);

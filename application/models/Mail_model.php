@@ -30,10 +30,10 @@ class Mail_model extends CI_Model
 
 
     // danh sách lo được chôt nhiều theo ngày
-    public function get_thong_ke($date = '2021-06-11')
+    public function get_thong_ke($date = '2021-06-11', $user_id)
     {
         // get acc
-        $users = $this->db->get('acc')->result_array();
+        $users = $this->db->get_where('acc', ['user_id' => $user_id])->result_array();
         // get list mail
         $out = [];
         foreach ($users as $user) {

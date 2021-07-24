@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Acc extends Ci_Controller
+class Acc extends MY_Controller
 {
 
     public function __construct()
@@ -11,6 +11,11 @@ class Acc extends Ci_Controller
         // $this->load->library(array('session', 'layout'));
         // $this->load->helper(array('url'));
         $this->load->model('Acc_model');
+        if(!isset($_SESSION['logined'])) {
+            redirect("/welcome");
+            die;
+        }
+      
     }
 
     public function index()
@@ -18,12 +23,14 @@ class Acc extends Ci_Controller
     }
 
     public function add()
-    {
+    { 
+       
+        $user_id  = $_SESSION['user']['user_id'];
         $params['acc_email'] = $this->input->post('acc_email');
         $params['acc_pass'] = $this->input->post('acc_pass');
         $params['acc_name'] = $this->input->post('acc_name');
         $params['link_check'] = $this->input->post('link_check');
-
+        $params['user_id'] = $user_id;
         $added  = $this->Acc_model->add($params);
         if ($added == 0) {
             echo json_encode(['status' => false]);
@@ -32,11 +39,10 @@ class Acc extends Ci_Controller
         }
     }
 
-
-
     public function get_list()
     {
-        $data = $this->Acc_model->get_list();
+        $user_id  = $_SESSION['user']['user_id'];
+        $data = $this->Acc_model->get_list( $user_id);
         $out = [];
         foreach ($data as $row) {
             $row['acc_actived'] = ($row['acc_actived'] == 1) ? true : false;

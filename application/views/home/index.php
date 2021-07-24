@@ -13,7 +13,7 @@
                     <form action="<?= base_url("/Auth/login") ?>" method="POST">
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">account:</label>
-                            <input type="text" required name="user_phone" class="form-control" id="recipient-name">
+                            <input type="text" required name="user_name" class="form-control" id="recipient-name">
                         </div>
                         <div class="form-group">
                             <label for="message-text" class="col-form-label">pass:</label>

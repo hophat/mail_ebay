@@ -6,6 +6,7 @@
 
 include 'index/index.js.php';
 include 'add_acc/index.js.php';
+include 'add_user/index.js.php';
 include 'view_mail/index.js.php';
 ?>
 
@@ -18,6 +19,11 @@ include 'view_mail/index.js.php';
 		{
 			path: '/add',
 			component: add,
+			props: true
+		},
+		{
+			path: '/add_user',
+			component: add_user,
 			props: true
 		},
 		{
