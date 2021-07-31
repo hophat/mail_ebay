@@ -270,6 +270,31 @@ array_unshift($days, $dateNow);
 
                 })
             },
+            test_connect(acc, pass) {
+                if (acc == '' || pass == '') {
+                    this.$notify.error({
+                        title: 'Nhập email, pass',
+                    });
+                    return;
+                }
+                const loading = this.$loading({});
+                const Formdt = new FormData();
+                Formdt.append('account', acc);
+                Formdt.append('pass', pass);
+                axios.post("<?= base_url('/Luu_mail/check_connect') ?>",Formdt).then(res => {
+                    let checked = res.data;
+                    if (checked.result) {
+                        this.$notify.success({
+                            title: 'Kết nối thành công',
+                        });
+                    } else {
+                        this.$notify.error({
+                            title: 'Kết nối Lỗi',
+                        });
+                    }
+                    loading.close();
+                })
+            },
             notify_success(mess) {
                 this.$notify.success({
                     title: 'Thông báo',

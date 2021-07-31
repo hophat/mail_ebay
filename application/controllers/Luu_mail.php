@@ -36,6 +36,12 @@ class Luu_mail extends Ci_Controller
                 $pass = $acc['acc_pass'];
                 $connection = imap_open('{imap-mail.outlook.com:993/imap/ssl}INBOX', $accout, $pass);
                 $MC = imap_check($connection);
+                if (!$MC) {
+                    // echo "lỗi"    ;
+                    $update_acc['is_connect'] = 0;
+                    $this->Acc_model->update($update_acc,  $acc['acc_id']);
+                    continue;
+                }
                 log_message('error', imap_last_error());
                 $emailData = imap_search($connection, 'SINCE "' . $date . '"');
                 if (!empty($emailData)) {
@@ -66,7 +72,7 @@ class Luu_mail extends Ci_Controller
                         $from = $overview[0]->from;
                         date_default_timezone_set('Asia/Ho_Chi_Minh');
                         $date = date("Y-m-d H:i", strtotime($overview[0]->date));
-                        var_dump($date);
+                        // var_dump($date);
                         $body = $message_;
                         $parrams['mail_uid'] = $uid;
                         $parrams['mail_title'] = $title;
@@ -91,6 +97,18 @@ class Luu_mail extends Ci_Controller
         }
     }
 
+    public function check_connect()
+    {
+        $accout = $this->input->post('account');
+        $pass = $this->input->post('pass');
+        $connection = imap_open('{imap-mail.outlook.com:993/imap/ssl}INBOX', $accout, $pass);
+        $MC = imap_check($connection);
+        if (!$MC) {
+            echo json_encode(['result' => false]);
+            die;
+        }
+        echo json_encode(['result' => true]);
+    }
 
     public function get_list($date = '')
     {

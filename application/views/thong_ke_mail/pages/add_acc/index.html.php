@@ -76,6 +76,10 @@
                         <el-form-item label="link_check" prop="link_check">
                             <el-input v-model="ruleForm.link_check"></el-input>
                         </el-form-item>
+                        
+                        <el-form-item label="Test" >
+                            <el-button type='warning' @click="test_connect(ruleForm.email,ruleForm.pass)">Test connect</el-button>
+                        </el-form-item>
                         <el-form-iem>
                             <el-button type="primary" @click="submitForm('ruleForm')">Create</el-button>
                         </el-form-iem>
@@ -109,6 +113,11 @@
                         <el-form-item label="link_check" prop="link_check">
                             <el-input v-model="ruleFormEdit.link_check"></el-input>
                         </el-form-item>
+
+                        <el-form-item label="Test" >
+                            <el-button type='warning' @click="test_connect(ruleFormEdit.email,ruleFormEdit.pass)">Test connect</el-button>
+                        </el-form-item>
+
                         <el-form-iem>
                             <el-button type="primary" @click="submitForm('ruleFormEdit')">update</el-button>
                         </el-form-iem>

@@ -29,6 +29,7 @@
                             <th>Chat</th>
                             <th>khác</th>
                             <th>Status</th>
+                            <th>is Connect</th>
                             <th>Ngày</th>
                         </tr>
                     </thead>
@@ -55,6 +56,11 @@
                             <td>
                                 <label for="" v-if="item.code_status == false" class="text-danger">Die</label>
                                 <label for="" v-if="item.code_status == true" class="text-success">Active</label>
+                                <!-- {{(item.code_status == true) ? 'active' : 'die'}} -->
+                            </td>
+                            <td>
+                                <label for="" v-if="item.is_connect == 0" class="text-danger">Die</label>
+                                <label for="" v-if="item.is_connect == 1" class="text-success">Active</label>
                                 <!-- {{(item.code_status == true) ? 'active' : 'die'}} -->
                             </td>
                             <td>{{item.date}}</td>
