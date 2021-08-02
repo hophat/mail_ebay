@@ -42,6 +42,9 @@ class Luu_mail extends Ci_Controller
                     $this->Acc_model->update($update_acc,  $acc['acc_id']);
                     continue;
                 }
+                $update_acc['is_connect'] = 1;
+                $this->Acc_model->update($update_acc,  $acc['acc_id']);
+
                 log_message('error', imap_last_error());
                 $emailData = imap_search($connection, 'SINCE "' . $date . '"');
                 if (!empty($emailData)) {
